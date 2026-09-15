@@ -12,10 +12,20 @@ export const CASES = [
   // ------------------------------------------------------------- 01 text
   {
     id: 'C1.1', group: 'Text and marks', severity: 'major',
-    rule: 'Bold, italic, strikethrough, inline code, subscript and superscript all survive.',
+    rule: 'Marks that Markdown can express — bold, italic, strikethrough, inline code — survive.',
+    // GFM accepts one or two tildes for strikethrough, so both count.
     check: (x) => x.htmlHasAll(['<strong>bold</strong>', '<em>italic</em>'])
-      && /<s>|~~strikethrough~~|<del>/.test(x.html)
+      && (/~~?strikethrough~~?/.test(x.text) || /<s>|<del>/.test(x.html))
       && x.html.includes('<code>inline code</code>'),
+  },
+  {
+    id: 'C1.8', group: 'Text and marks', severity: 'minor',
+    rule: 'Marks Markdown cannot express — underline, subscript, superscript — fall back to HTML rather than being flattened.',
+    // Losing sub/sup silently changes meaning (H<sub>2</sub>O, x<sup>2</sup>),
+    // and every Markdown renderer in common use passes these tags through.
+    check: (x) => /<u>underline<\/u>/.test(x.html)
+      && /<sub>subscript<\/sub>/.test(x.html)
+      && /<sup>superscript<\/sup>/.test(x.html),
   },
   {
     id: 'C1.2', group: 'Text and marks', severity: 'major',
@@ -121,7 +131,9 @@ export const CASES = [
   {
     id: 'C3.5', group: 'Lists and tasks', severity: 'critical',
     rule: 'Two paragraphs in one list item stay two paragraphs, and are never concatenated.',
-    check: (x) => !/First paragraph of the item\.\s*Second paragraph/.test(x.renderedText),
+    // Stripping tags first would make a concatenation look identical to two
+    // paragraphs, so this reads the rendered structure instead.
+    check: (x) => /<p>First paragraph of the item\.<\/p>/.test(x.html),
   },
   {
     id: 'C3.6', group: 'Lists and tasks', severity: 'critical',

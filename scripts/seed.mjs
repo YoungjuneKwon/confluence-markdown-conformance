@@ -28,7 +28,7 @@ if (!BASE || !EMAIL || !TOKEN) {
 
 const AUTH = 'Basic ' + Buffer.from(`${EMAIL}:${TOKEN}`).toString('base64')
 
-async function api(method, route, body, extraHeaders = {}) {
+async function api(method, route, body, extraHeaders = {}, attempt = 1) {
   const res = await fetch(`${BASE}${route}`, {
     method,
     headers: {
@@ -43,6 +43,13 @@ async function api(method, route, body, extraHeaders = {}) {
   let json = null
   try { json = JSON.parse(text) } catch { /* not json */ }
   if (!res.ok) {
+    // A version conflict means someone (usually the previous run, still
+    // settling) wrote first; rate limits and 5xx are worth one more go too.
+    const retryable = [409, 429, 500, 502, 503, 504].includes(res.status)
+    if (retryable && attempt < 4) {
+      await new Promise((r) => setTimeout(r, 400 * 2 ** attempt))
+      return api(method, route, body, extraHeaders, attempt + 1)
+    }
     const err = new Error(`${method} ${route} → ${res.status}\n${text.slice(0, 500)}`)
     err.status = res.status
     err.json = json

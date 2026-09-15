@@ -116,7 +116,8 @@ defensible stylistic choice.
 
 | Id | Severity | Rule |
 |---|---|---|
-| `C1.1` | major | Bold, italic, strikethrough, inline code, subscript and superscript all survive. |
+| `C1.1` | major | Marks that Markdown can express — bold, italic, strikethrough, inline code — survive. |
+| `C1.8` | minor | Marks Markdown cannot express — underline, subscript, superscript — fall back to HTML rather than being flattened. |
 | `C1.2` | major | Inline code containing a backtick or a pipe keeps those characters literally. |
 | `C1.3` | major | Text that looks like Markdown syntax is escaped so it renders as literal characters. |
 | `C1.4` | major | External links, mail links and in-page anchors are all preserved. |
@@ -213,6 +214,6 @@ defensible stylistic choice.
 | `C9.2` | major | The exported directory structure mirrors the page hierarchy. |
 | `C9.3` | critical | Every page in the corpus appears exactly once in the export. |
 
-56 rules: 23 critical, 28 major, 5 minor.
+57 rules: 23 critical, 28 major, 6 minor.
 
 <!-- END RULES -->

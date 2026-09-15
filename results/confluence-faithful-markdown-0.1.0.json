@@ -1,8 +1,8 @@
 {
-  "label": "Markdown Exporter for Confluence 3.5.0",
+  "label": "confluence-faithful-markdown 0.1.0",
   "files": 27,
   "mdFiles": 20,
-  "earned": 97,
+  "earned": 131,
   "total": 131,
   "results": [
     {
@@ -18,7 +18,7 @@
       "group": "Text and marks",
       "severity": "minor",
       "rule": "Marks Markdown cannot express — underline, subscript, superscript — fall back to HTML rather than being flattened.",
-      "pass": false,
+      "pass": true,
       "error": null
     },
     {
@@ -90,7 +90,7 @@
       "group": "Code blocks",
       "severity": "major",
       "rule": "A code macro with a language produces a fence that declares that language.",
-      "pass": false,
+      "pass": true,
       "error": null
     },
     {
@@ -98,7 +98,7 @@
       "group": "Code blocks",
       "severity": "major",
       "rule": "Every declared language round-trips, not just the first one.",
-      "pass": false,
+      "pass": true,
       "error": null
     },
     {
@@ -114,7 +114,7 @@
       "group": "Code blocks",
       "severity": "critical",
       "rule": "A fence written inside a code block does not terminate the block early.",
-      "pass": false,
+      "pass": true,
       "error": null
     },
     {
@@ -146,7 +146,7 @@
       "group": "Lists and tasks",
       "severity": "critical",
       "rule": "A completed task exports as completed. Flipping a task to incomplete changes a fact.",
-      "pass": false,
+      "pass": true,
       "error": null
     },
     {
@@ -170,7 +170,7 @@
       "group": "Lists and tasks",
       "severity": "critical",
       "rule": "Two paragraphs in one list item stay two paragraphs, and are never concatenated.",
-      "pass": false,
+      "pass": true,
       "error": null
     },
     {
@@ -178,7 +178,7 @@
       "group": "Lists and tasks",
       "severity": "critical",
       "rule": "A code block inside a list item stays inside that item and does not split the list.",
-      "pass": false,
+      "pass": true,
       "error": null
     },
     {
@@ -290,7 +290,7 @@
       "group": "Media",
       "severity": "critical",
       "rule": "An image wrapped in a link produces valid Markdown — a link containing an image.",
-      "pass": false,
+      "pass": true,
       "error": null
     },
     {
@@ -306,7 +306,7 @@
       "group": "Media",
       "severity": "major",
       "rule": "A non-image attachment is exported and linked relatively, not back to a wiki URL.",
-      "pass": false,
+      "pass": true,
       "error": null
     },
     {
@@ -370,7 +370,7 @@
       "group": "Macros",
       "severity": "critical",
       "rule": "An unknown third-party macro still yields its body text.",
-      "pass": false,
+      "pass": true,
       "error": null
     },
     {
@@ -394,7 +394,7 @@
       "group": "Title hazards",
       "severity": "critical",
       "rule": "No exported filename is an opaque placeholder such as page-<uuid>.md.",
-      "pass": false,
+      "pass": true,
       "error": null
     },
     {
@@ -402,7 +402,7 @@
       "group": "Title hazards",
       "severity": "critical",
       "rule": "A page titled only in Korean still produces a filename a human can identify.",
-      "pass": false,
+      "pass": true,
       "error": null
     },
     {
@@ -410,7 +410,7 @@
       "group": "Title hazards",
       "severity": "critical",
       "rule": "A title mixing Korean with one ASCII word does not collapse to that word alone.",
-      "pass": false,
+      "pass": true,
       "error": null
     },
     {

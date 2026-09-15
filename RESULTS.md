@@ -9,7 +9,19 @@ often — one of them was rewritten from scratch eight days before it was tested
 
 | App | Version | Tested | Cases | Weighted | Critical failures |
 |---|---|---|---|---|---|
-| Markdown Exporter for Confluence (Narva Software) | 3.5.0 | 2026-09-15 | 43/56 | 95/130 (73%) | 9 |
+| Markdown Exporter for Confluence (Narva Software) | 3.5.0 | 2026-09-15 | 44/57 | 97/131 (74%) | 9 |
+| *(reference implementation — see the disclosure below)* | 0.1.0 | 2026-09-15 | 57/57 | 131/131 (100%) | 0 |
+
+### Disclosure
+
+The second row is the author's own converter, written after the suite and not
+yet released. It is here because hiding it would be worse, not because it is an
+independent result — **treat it as the author marking their own homework.**
+
+Two things are checkable rather than taken on trust. The rules were written from
+failures measured in shipping apps *before* that converter existed, and the git
+history shows it. And every rule is executable: if one looks tuned to a
+particular implementation, it can be read, argued with, and changed.
 
 ---
 
@@ -29,7 +41,7 @@ survived.
 
 | Group | Passed |
 |---|---|
-| Text and marks | 8/9 |
+| Text and marks | 9/10 |
 | Code blocks | 4/7 |
 | Lists and tasks | 4/7 |
 | Tables | 6/6 |
@@ -119,15 +131,16 @@ The ADF carries `language: python`, `shell`, `yaml`, `json`. Every exported fenc
 is a bare ```` ``` ````. Syntax highlighting is lost and cannot be recovered on
 re-import.
 
-**C1.1 — strikethrough, underline, subscript and superscript are flattened.** `major`
+**C1.8 — underline, subscript and superscript are flattened.** `minor`
 
 ```
-source   : <s>strikethrough</s>, <u>underline</u>, <sub>sub</sub>, <sup>sup</sup>
-exported : strikethrough, underline, subscript, superscript
+source   : <u>underline</u>, <sub>sub</sub>, <sup>sup</sup>
+exported : underline, subscript, superscript
 ```
 
-Bold and italic survive. Strikethrough matters most here — it usually means
-"this is no longer true", and the export silently makes it true again.
+Bold, italic, strikethrough and inline code all survive (C1.1 passes). These
+three have no Markdown form, but every renderer in common use passes the HTML
+tags through, and losing sub/sup changes meaning — `H2O` is not `H₂O`.
 
 **C5.11 — a non-image attachment is linked back to the wiki.** `major`
 

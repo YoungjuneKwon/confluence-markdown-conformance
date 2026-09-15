@@ -4,7 +4,7 @@ A reproducible way to find out what your Confluence → Markdown exporter keeps,
 and what it quietly throws away.
 
 You seed a Confluence space with a fixed corpus, export it with whatever app you
-use, and run a scorer. The scorer checks 56 rules and tells you which ones your
+use, and run a scorer. The scorer checks 57 rules and tells you which ones your
 export breaks.
 
 It exists because this kind of damage is invisible. A completed task that exports
