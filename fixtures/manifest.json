@@ -1,0 +1,139 @@
+{
+  "space": {
+    "key": "MDCONF",
+    "name": "Markdown Conformance Corpus"
+  },
+  "pages": [
+    {
+      "id": "home",
+      "title": "Markdown Conformance Corpus",
+      "body": "00-home.xhtml",
+      "root": true
+    },
+    {
+      "id": "text",
+      "title": "01 Text and marks",
+      "body": "01-text-and-marks.xhtml",
+      "parent": "home"
+    },
+    {
+      "id": "code",
+      "title": "02 Code blocks",
+      "body": "02-code-blocks.xhtml",
+      "parent": "home"
+    },
+    {
+      "id": "lists",
+      "title": "03 Lists and tasks",
+      "body": "03-lists-and-tasks.xhtml",
+      "parent": "home"
+    },
+    {
+      "id": "tables",
+      "title": "04 Tables",
+      "body": "04-tables.xhtml",
+      "parent": "home"
+    },
+    {
+      "id": "media",
+      "title": "05 Media and attachments",
+      "body": "05-media.xhtml",
+      "parent": "home",
+      "attachments": [
+        "diagram.png",
+        "photo.jpg",
+        "vector.svg",
+        "space name.png",
+        "그림-파일.png",
+        "nested-photo.png",
+        "sample.txt"
+      ]
+    },
+    {
+      "id": "macros",
+      "title": "06 Macros without a Markdown equivalent",
+      "body": "06-macros.xhtml",
+      "parent": "home"
+    },
+    {
+      "id": "layout",
+      "title": "07 Column layout",
+      "body": "07-layout.xhtml",
+      "parent": "home"
+    },
+
+    {
+      "id": "titles",
+      "title": "08 Title hazards",
+      "body": "08-title-hazards.xhtml",
+      "parent": "home"
+    },
+    {
+      "id": "title-ko",
+      "title": "한글로만 이루어진 제목",
+      "body": "08a-korean.xhtml",
+      "parent": "titles"
+    },
+    {
+      "id": "title-ja",
+      "title": "日本語のタイトル",
+      "body": "08b-japanese.xhtml",
+      "parent": "titles"
+    },
+    {
+      "id": "title-mixed",
+      "title": "한글 문서 — 파일명과 제목에 비ASCII",
+      "body": "08c-mixed.xhtml",
+      "parent": "titles"
+    },
+    {
+      "id": "title-punct",
+      "title": "Q&A: what about / slashes, \"quotes\" and ?",
+      "body": "08d-punctuation.xhtml",
+      "parent": "titles"
+    },
+    {
+      "id": "title-emoji",
+      "title": "제목에 이모지 🚀 포함",
+      "body": "08e-emoji.xhtml",
+      "parent": "titles"
+    },
+    {
+      "id": "title-collide-a",
+      "title": "릴리스 노트 2026",
+      "body": "08f-collision.xhtml",
+      "parent": "titles"
+    },
+    {
+      "id": "title-collide-b",
+      "title": "릴리스 노트 2027",
+      "body": "08g-collision.xhtml",
+      "parent": "titles"
+    },
+
+    {
+      "id": "depth1",
+      "title": "09 Depth 1",
+      "body": "09-depth-1.xhtml",
+      "parent": "home"
+    },
+    {
+      "id": "depth2",
+      "title": "09 Depth 2 (child)",
+      "body": "09-depth-2.xhtml",
+      "parent": "depth1"
+    },
+    {
+      "id": "depth3",
+      "title": "09 Depth 3 (grandchild)",
+      "body": "09-depth-3.xhtml",
+      "parent": "depth2"
+    },
+    {
+      "id": "depth4",
+      "title": "09 Depth 4 (great-grandchild)",
+      "body": "09-depth-4.xhtml",
+      "parent": "depth3"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+<p>Attachments must come out of the export as files, with body references
+rewritten to point at them. External images must not be silently dropped.</p>
+
+<h2>C5.1 An attached PNG</h2>
+<ac:image ac:alt="diagram"><ri:attachment ri:filename="diagram.png" /></ac:image>
+
+<h2>C5.2 An attached JPEG</h2>
+<ac:image ac:alt="photo jpeg"><ri:attachment ri:filename="photo.jpg" /></ac:image>
+
+<h2>C5.3 An attached SVG</h2>
+<ac:image ac:alt="vector"><ri:attachment ri:filename="vector.svg" /></ac:image>
+
+<h2>C5.4 An attachment whose filename contains a space</h2>
+<ac:image ac:alt="spaced filename"><ri:attachment ri:filename="space name.png" /></ac:image>
+
+<h2>C5.5 An attachment with a non-ASCII filename</h2>
+<ac:image ac:alt="korean filename"><ri:attachment ri:filename="그림-파일.png" /></ac:image>
+
+<h2>C5.6 An external image by URL</h2>
+<ac:image ac:alt="external"><ri:url ri:value="https://wac-cdn.atlassian.com/assets/img/favicons/atlassian/favicon.png" /></ac:image>
+
+<h2>C5.7 An image with an explicit width</h2>
+<ac:image ac:alt="sized" ac:width="200"><ri:attachment ri:filename="diagram.png" /></ac:image>
+
+<h2>C5.8 An image wrapped in a link</h2>
+<p><a href="https://www.atlassian.com/"><ac:image ac:alt="clickable"><ri:attachment ri:filename="diagram.png" /></ac:image></a></p>
+
+<h2>C5.9 An image inside a table cell</h2>
+<table><tbody>
+  <tr><th>Caption</th><th>Image</th></tr>
+  <tr><td>in a cell</td><td><ac:image ac:alt="cell image"><ri:attachment ri:filename="diagram.png" /></ac:image></td></tr>
+</tbody></table>
+
+<h2>C5.10 An image inside a list item</h2>
+<ul>
+  <li><p>An item with a picture.</p>
+    <ac:image ac:alt="list image"><ri:attachment ri:filename="nested-photo.png" /></ac:image>
+  </li>
+</ul>
+
+<h2>C5.11 A non-image attachment linked from the body</h2>
+<p>Download <ac:link><ri:attachment ri:filename="sample.txt" /><ac:link-body>the sample file</ac:link-body></ac:link>.</p>
+
+<h2>C5.12 The same attachment used twice</h2>
+<ac:image ac:alt="repeat one"><ri:attachment ri:filename="diagram.png" /></ac:image>
+<ac:image ac:alt="repeat two"><ri:attachment ri:filename="diagram.png" /></ac:image>

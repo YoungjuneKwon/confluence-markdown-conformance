@@ -1,0 +1,2 @@
+This is a plain text attachment.
+It is linked from the body of case C5.11.

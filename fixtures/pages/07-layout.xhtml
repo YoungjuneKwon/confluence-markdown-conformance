@@ -1,0 +1,25 @@
+<p>Column layouts are a pure presentation construct. Markdown has no columns, so
+the only correct behaviour is to flatten in reading order without losing text.</p>
+
+<ac:layout>
+  <ac:layout-section ac:type="two_equal">
+    <ac:layout-cell>
+      <h2>C7.1 Left column</h2>
+      <p>Text that lives in the left column.</p>
+      <ul><li>left one</li><li>left two</li></ul>
+    </ac:layout-cell>
+    <ac:layout-cell>
+      <h2>C7.2 Right column</h2>
+      <p>Text that lives in the right column.</p>
+      <ac:structured-macro ac:name="code">
+        <ac:parameter ac:name="language">python</ac:parameter>
+        <ac:plain-text-body><![CDATA[print("inside a layout cell")]]></ac:plain-text-body>
+      </ac:structured-macro>
+    </ac:layout-cell>
+  </ac:layout-section>
+  <ac:layout-section ac:type="three_equal">
+    <ac:layout-cell><p>C7.3 First of three.</p></ac:layout-cell>
+    <ac:layout-cell><p>C7.4 Second of three.</p></ac:layout-cell>
+    <ac:layout-cell><p>C7.5 Third of three.</p></ac:layout-cell>
+  </ac:layout-section>
+</ac:layout>

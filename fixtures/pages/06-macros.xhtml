@@ -1,0 +1,66 @@
+<p>These are Confluence constructs with no Markdown equivalent. The rule for all
+of them is the same: <strong>degrade, never delete.</strong></p>
+
+<h2>C6.1 Info, note, warning, tip panels</h2>
+<ac:structured-macro ac:name="info"><ac:rich-text-body><p>An info panel. Its text must survive.</p></ac:rich-text-body></ac:structured-macro>
+<ac:structured-macro ac:name="note"><ac:rich-text-body><p>A note panel.</p></ac:rich-text-body></ac:structured-macro>
+<ac:structured-macro ac:name="warning"><ac:rich-text-body><p>A warning panel with <strong>bold</strong> inside.</p></ac:rich-text-body></ac:structured-macro>
+<ac:structured-macro ac:name="tip"><ac:rich-text-body><p>A tip panel.</p></ac:rich-text-body></ac:structured-macro>
+
+<h2>C6.2 A panel containing block content</h2>
+<ac:structured-macro ac:name="info">
+  <ac:rich-text-body>
+    <p>A panel that holds a list and a code block:</p>
+    <ul><li>first</li><li>second</li></ul>
+    <ac:structured-macro ac:name="code">
+      <ac:parameter ac:name="language">bash</ac:parameter>
+      <ac:plain-text-body><![CDATA[echo "inside a panel"]]></ac:plain-text-body>
+    </ac:structured-macro>
+  </ac:rich-text-body>
+</ac:structured-macro>
+
+<h2>C6.3 Expand</h2>
+<ac:structured-macro ac:name="expand">
+  <ac:parameter ac:name="title">Click to see the hidden content</ac:parameter>
+  <ac:rich-text-body>
+    <p>Hidden body text. This must not disappear just because it is collapsed.</p>
+  </ac:rich-text-body>
+</ac:structured-macro>
+
+<h2>C6.4 Status lozenge</h2>
+<p>Build state:
+  <ac:structured-macro ac:name="status">
+    <ac:parameter ac:name="colour">Green</ac:parameter>
+    <ac:parameter ac:name="title">PASSED</ac:parameter>
+  </ac:structured-macro>
+  and
+  <ac:structured-macro ac:name="status">
+    <ac:parameter ac:name="colour">Red</ac:parameter>
+    <ac:parameter ac:name="title">FAILED</ac:parameter>
+  </ac:structured-macro>
+</p>
+
+<h2>C6.5 A date</h2>
+<p>Due <time datetime="2026-12-31" />, reviewed <time datetime="2026-09-15" />.</p>
+
+<h2>C6.6 Table of contents</h2>
+<ac:structured-macro ac:name="toc" />
+
+<h2>C6.7 Children display</h2>
+<ac:structured-macro ac:name="children" />
+
+<h2>C6.8 Excerpt</h2>
+<ac:structured-macro ac:name="excerpt">
+  <ac:rich-text-body><p>This sentence is the page excerpt.</p></ac:rich-text-body>
+</ac:structured-macro>
+
+<h2>C6.9 Include another page</h2>
+<ac:structured-macro ac:name="include">
+  <ac:parameter ac:name=""><ac:link><ri:page ri:content-title="02 Code blocks" /></ac:link></ac:parameter>
+</ac:structured-macro>
+
+<h2>C6.10 An unknown third-party macro</h2>
+<ac:structured-macro ac:name="some-macro-we-do-not-know">
+  <ac:parameter ac:name="key">value</ac:parameter>
+  <ac:rich-text-body><p>Body of a macro the exporter has never seen.</p></ac:rich-text-body>
+</ac:structured-macro>

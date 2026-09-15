@@ -1,0 +1,457 @@
+{
+  "label": "Markdown Exporter for Confluence 3.5.0",
+  "files": 27,
+  "mdFiles": 20,
+  "earned": 95,
+  "total": 130,
+  "results": [
+    {
+      "id": "C1.1",
+      "group": "Text and marks",
+      "severity": "major",
+      "rule": "Bold, italic, strikethrough, inline code, subscript and superscript all survive.",
+      "pass": false,
+      "error": null
+    },
+    {
+      "id": "C1.2",
+      "group": "Text and marks",
+      "severity": "major",
+      "rule": "Inline code containing a backtick or a pipe keeps those characters literally.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C1.3",
+      "group": "Text and marks",
+      "severity": "major",
+      "rule": "Text that looks like Markdown syntax is escaped so it renders as literal characters.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C1.4",
+      "group": "Text and marks",
+      "severity": "major",
+      "rule": "External links, mail links and in-page anchors are all preserved.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C1.5",
+      "group": "Text and marks",
+      "severity": "major",
+      "rule": "A link to another exported page points at that page, not into the wiki.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C1.6",
+      "group": "Text and marks",
+      "severity": "critical",
+      "rule": "Emoji and non-Latin text survive unchanged.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C1.7",
+      "group": "Text and marks",
+      "severity": "minor",
+      "rule": "A soft line break stays a line break inside one paragraph, not a paragraph split.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C1.9",
+      "group": "Text and marks",
+      "severity": "major",
+      "rule": "A quote nested inside a quote keeps its depth.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C1.10",
+      "group": "Text and marks",
+      "severity": "major",
+      "rule": "Heading levels 3 through 6 are preserved as distinct levels.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C2.1",
+      "group": "Code blocks",
+      "severity": "major",
+      "rule": "A code macro with a language produces a fence that declares that language.",
+      "pass": false,
+      "error": null
+    },
+    {
+      "id": "C2.2",
+      "group": "Code blocks",
+      "severity": "major",
+      "rule": "Every declared language round-trips, not just the first one.",
+      "pass": false,
+      "error": null
+    },
+    {
+      "id": "C2.4",
+      "group": "Code blocks",
+      "severity": "minor",
+      "rule": "A code macro title is not silently dropped.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C2.5",
+      "group": "Code blocks",
+      "severity": "critical",
+      "rule": "A fence written inside a code block does not terminate the block early.",
+      "pass": false,
+      "error": null
+    },
+    {
+      "id": "C2.6",
+      "group": "Code blocks",
+      "severity": "major",
+      "rule": "A long line inside a code block is not wrapped.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C2.7",
+      "group": "Code blocks",
+      "severity": "critical",
+      "rule": "Non-ASCII text inside a code block survives.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C2.8",
+      "group": "Code blocks",
+      "severity": "major",
+      "rule": "A noformat macro becomes a code block, keeping its whitespace.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C3.1",
+      "group": "Lists and tasks",
+      "severity": "critical",
+      "rule": "A completed task exports as completed. Flipping a task to incomplete changes a fact.",
+      "pass": false,
+      "error": null
+    },
+    {
+      "id": "C3.2",
+      "group": "Lists and tasks",
+      "severity": "major",
+      "rule": "A bullet list nested three levels deep keeps all three levels.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C3.3",
+      "group": "Lists and tasks",
+      "severity": "major",
+      "rule": "An ordered list nested inside an ordered list stays nested.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C3.5",
+      "group": "Lists and tasks",
+      "severity": "critical",
+      "rule": "Two paragraphs in one list item stay two paragraphs, and are never concatenated.",
+      "pass": false,
+      "error": null
+    },
+    {
+      "id": "C3.6",
+      "group": "Lists and tasks",
+      "severity": "critical",
+      "rule": "A code block inside a list item stays inside that item and does not split the list.",
+      "pass": false,
+      "error": null
+    },
+    {
+      "id": "C3.7",
+      "group": "Lists and tasks",
+      "severity": "major",
+      "rule": "A table inside a list item is not deleted. Markdown cannot nest it, so it must degrade visibly.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C3.8",
+      "group": "Lists and tasks",
+      "severity": "major",
+      "rule": "A quote inside a list item survives.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C4.1",
+      "group": "Tables",
+      "severity": "major",
+      "rule": "A table becomes a Markdown table, and inline marks inside cells survive.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C4.2",
+      "group": "Tables",
+      "severity": "minor",
+      "rule": "Empty cells do not shift the remaining columns.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C4.4",
+      "group": "Tables",
+      "severity": "critical",
+      "rule": "Merged cells cannot be expressed in Markdown, but their text must not be lost.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C4.5",
+      "group": "Tables",
+      "severity": "critical",
+      "rule": "Block content inside a cell (a list, a code block, two paragraphs) is not dropped.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C4.6",
+      "group": "Tables",
+      "severity": "minor",
+      "rule": "A line break inside a cell stays a line break.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C4.8",
+      "group": "Tables",
+      "severity": "major",
+      "rule": "A table whose cells hold CJK text still parses as a table.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C5.1",
+      "group": "Media",
+      "severity": "critical",
+      "rule": "Attached images are written out as files.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C5.2",
+      "group": "Media",
+      "severity": "critical",
+      "rule": "Image references in the body point at the exported files.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C5.4",
+      "group": "Media",
+      "severity": "major",
+      "rule": "An attachment whose name contains a space is exported and correctly referenced.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C5.5",
+      "group": "Media",
+      "severity": "critical",
+      "rule": "An attachment with a non-ASCII filename is exported and still identifiable.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C5.6",
+      "group": "Media",
+      "severity": "major",
+      "rule": "An image referenced by external URL is kept as an external reference.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C5.8",
+      "group": "Media",
+      "severity": "critical",
+      "rule": "An image wrapped in a link produces valid Markdown — a link containing an image.",
+      "pass": false,
+      "error": null
+    },
+    {
+      "id": "C5.9",
+      "group": "Media",
+      "severity": "major",
+      "rule": "An image inside a table cell stays inside the table.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C5.11",
+      "group": "Media",
+      "severity": "major",
+      "rule": "A non-image attachment is exported and linked relatively, not back to a wiki URL.",
+      "pass": false,
+      "error": null
+    },
+    {
+      "id": "C6.1",
+      "group": "Macros",
+      "severity": "critical",
+      "rule": "Panel text survives. A panel with no Markdown equivalent must degrade, never delete.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C6.2",
+      "group": "Macros",
+      "severity": "critical",
+      "rule": "Block content inside a panel survives too.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C6.3",
+      "group": "Macros",
+      "severity": "critical",
+      "rule": "Collapsed content is still exported. Being hidden is not the same as being absent.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C6.4",
+      "group": "Macros",
+      "severity": "major",
+      "rule": "Status lozenge text survives.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C6.5",
+      "group": "Macros",
+      "severity": "major",
+      "rule": "Dates survive in a readable form.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C6.8",
+      "group": "Macros",
+      "severity": "major",
+      "rule": "Excerpt text survives.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C6.9",
+      "group": "Macros",
+      "severity": "major",
+      "rule": "An include macro does not abort the export.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C6.10",
+      "group": "Macros",
+      "severity": "critical",
+      "rule": "An unknown third-party macro still yields its body text.",
+      "pass": false,
+      "error": null
+    },
+    {
+      "id": "C7.1",
+      "group": "Layout",
+      "severity": "critical",
+      "rule": "Column layouts flatten in reading order with no cell dropped.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C7.2",
+      "group": "Layout",
+      "severity": "major",
+      "rule": "A code block inside a layout cell survives with its language.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C8.1",
+      "group": "Title hazards",
+      "severity": "critical",
+      "rule": "No exported filename is an opaque placeholder such as page-<uuid>.md.",
+      "pass": false,
+      "error": null
+    },
+    {
+      "id": "C8.2",
+      "group": "Title hazards",
+      "severity": "critical",
+      "rule": "A page titled only in Korean still produces a filename a human can identify.",
+      "pass": false,
+      "error": null
+    },
+    {
+      "id": "C8.3",
+      "group": "Title hazards",
+      "severity": "critical",
+      "rule": "A title mixing Korean with one ASCII word does not collapse to that word alone.",
+      "pass": false,
+      "error": null
+    },
+    {
+      "id": "C8.4",
+      "group": "Title hazards",
+      "severity": "critical",
+      "rule": "Two titles that differ only in discarded characters produce two distinct files.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C8.5",
+      "group": "Title hazards",
+      "severity": "major",
+      "rule": "A title containing punctuation illegal in filenames is exported safely, not dropped.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C8.6",
+      "group": "Title hazards",
+      "severity": "minor",
+      "rule": "A title containing emoji is exported without crashing.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C9.1",
+      "group": "Page tree",
+      "severity": "critical",
+      "rule": "A bulk export reaches the whole subtree, including great-grandchildren.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C9.2",
+      "group": "Page tree",
+      "severity": "major",
+      "rule": "The exported directory structure mirrors the page hierarchy.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C9.3",
+      "group": "Page tree",
+      "severity": "critical",
+      "rule": "Every page in the corpus appears exactly once in the export.",
+      "pass": true,
+      "error": null
+    }
+  ]
+}

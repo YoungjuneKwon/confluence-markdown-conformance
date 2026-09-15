@@ -1,0 +1,72 @@
+<p>Confluence tables can hold block content and merged cells. Markdown tables
+cannot. What an exporter does at that boundary is the whole test.</p>
+
+<h2>C4.1 A plain table with a header row</h2>
+<table><tbody>
+  <tr><th>Field</th><th>Type</th><th>Notes</th></tr>
+  <tr><td>spaceKey</td><td><code>string</code></td><td>Target space</td></tr>
+  <tr><td>body</td><td><code>object</code></td><td>Contains a pipe: <code>a | b</code></td></tr>
+  <tr><td>labels</td><td><code>string[]</code></td><td><strong>bold</strong>, <em>italic</em>, <a href="https://example.com/">a link</a></td></tr>
+</tbody></table>
+
+<h2>C4.2 A table with an empty cell and a missing value</h2>
+<table><tbody>
+  <tr><th>A</th><th>B</th></tr>
+  <tr><td>filled</td><td></td></tr>
+  <tr><td></td><td>filled</td></tr>
+</tbody></table>
+
+<h2>C4.3 A table with a header column as well as a header row</h2>
+<table><tbody>
+  <tr><th></th><th>Cloud</th><th>Data Center</th></tr>
+  <tr><th>Import</th><td>yes</td><td>yes</td></tr>
+  <tr><th>Export</th><td>yes</td><td>no</td></tr>
+</tbody></table>
+
+<h2>C4.4 A table with merged cells (colspan and rowspan)</h2>
+<table><tbody>
+  <tr><th colspan="2">Merged header across two columns</th><th>Third</th></tr>
+  <tr><td rowspan="2">Spans two rows</td><td>b1</td><td>c1</td></tr>
+  <tr><td>b2</td><td>c2</td></tr>
+</tbody></table>
+
+<h2>C4.5 A cell containing block content</h2>
+<table><tbody>
+  <tr><th>Case</th><th>Content</th></tr>
+  <tr>
+    <td>list in a cell</td>
+    <td><ul><li>one</li><li>two</li></ul></td>
+  </tr>
+  <tr>
+    <td>code in a cell</td>
+    <td>
+      <ac:structured-macro ac:name="code">
+        <ac:parameter ac:name="language">json</ac:parameter>
+        <ac:plain-text-body><![CDATA[{"a": 1}]]></ac:plain-text-body>
+      </ac:structured-macro>
+    </td>
+  </tr>
+  <tr>
+    <td>two paragraphs</td>
+    <td><p>First.</p><p>Second.</p></td>
+  </tr>
+</tbody></table>
+
+<h2>C4.6 A cell containing a line break</h2>
+<table><tbody>
+  <tr><th>Item</th><th>Value</th></tr>
+  <tr><td>multiline</td><td>first line<br />second line</td></tr>
+</tbody></table>
+
+<h2>C4.7 A wide table</h2>
+<table><tbody>
+  <tr><th>c1</th><th>c2</th><th>c3</th><th>c4</th><th>c5</th><th>c6</th><th>c7</th><th>c8</th></tr>
+  <tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td></tr>
+</tbody></table>
+
+<h2>C4.8 CJK column widths</h2>
+<table><tbody>
+  <tr><th>항목</th><th>값</th></tr>
+  <tr><td>아주 긴 한글 항목 이름입니다</td><td>값</td></tr>
+  <tr><td>ASCII</td><td>v</td></tr>
+</tbody></table>

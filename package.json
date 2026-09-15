@@ -1,0 +1,16 @@
+{
+  "name": "confluence-markdown-conformance",
+  "version": "0.1.0",
+  "description": "A reproducible conformance suite for Confluence → Markdown exporters.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "seed": "node scripts/seed.mjs",
+    "verify": "node scripts/verify-seed.mjs",
+    "score": "node scripts/score.mjs",
+    "spec": "node scripts/spec.mjs"
+  },
+  "dependencies": {
+    "markdown-it": "^14.1.0"
+  }
+}

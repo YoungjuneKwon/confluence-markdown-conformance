@@ -1,0 +1,59 @@
+<p>This page exercises inline formatting and link forms. Every mark below must
+survive the round trip to Markdown.</p>
+
+<h2>C1.1 Inline marks</h2>
+<p><strong>bold</strong>, <em>italic</em>, <strong><em>bold italic</em></strong>,
+<span style="text-decoration: line-through;">strikethrough</span>,
+<u>underline</u>, <code>inline code</code>,
+<sub>subscript</sub>, <sup>superscript</sup>.</p>
+
+<h2>C1.2 Inline code that contains backticks and pipes</h2>
+<p>A backtick inside code: <code>a ` b</code>. A pipe inside code: <code>a | b</code>.
+An HTML-looking string: <code>&lt;div class="x"&gt;</code>.</p>
+
+<h2>C1.3 Characters that mean something in Markdown</h2>
+<p>These are literal text, not formatting: *asterisks*, _underscores_, #hash,
+[brackets], (parens), |pipe|, `backtick`, \backslash, 1. not-a-list.</p>
+
+<h2>C1.4 Links</h2>
+<ul>
+  <li>External: <a href="https://www.atlassian.com/">Atlassian</a></li>
+  <li>External with title attribute: <a href="https://example.com/" title="Example title">Example</a></li>
+  <li>Autolink style: <a href="https://example.com/raw">https://example.com/raw</a></li>
+  <li>Mail: <a href="mailto:hello@example.com">hello@example.com</a></li>
+  <li>Anchor on this page: <a href="#C14-Links">back to this section</a></li>
+  <li>Link text containing a bracket: <a href="https://example.com/b">text [with] brackets</a></li>
+</ul>
+
+<h2>C1.5 Link to another Confluence page</h2>
+<p>A native page link: <ac:link><ri:page ri:content-title="02 Code blocks" /></ac:link></p>
+<p>A page link with custom text:
+<ac:link><ri:page ri:content-title="03 Lists and tasks" /><ac:link-body>custom label</ac:link-body></ac:link></p>
+
+<h2>C1.6 Emoji and non-Latin text</h2>
+<p>Emoji: 🚀 ✅ 🇰🇷. Korean: 안녕하세요. Japanese: こんにちは. Chinese: 你好. Hanja: 漢字.</p>
+
+<h2>C1.7 Line breaks</h2>
+<p>This line ends with a soft break<br />and this is the same paragraph.</p>
+<p>This is a separate paragraph.</p>
+
+<h2>C1.8 Horizontal rule</h2>
+<p>Before the rule.</p>
+<hr />
+<p>After the rule.</p>
+
+<h2>C1.9 Blockquote, including a nested one</h2>
+<blockquote>
+  <p>Level one quote.</p>
+  <blockquote>
+    <p>Level two quote.</p>
+    <ul><li>list inside a nested quote</li></ul>
+  </blockquote>
+  <p>Back to level one.</p>
+</blockquote>
+
+<h2>C1.10 Heading depth</h2>
+<h3>Heading level 3</h3>
+<h4>Heading level 4</h4>
+<h5>Heading level 5</h5>
+<h6>Heading level 6</h6>

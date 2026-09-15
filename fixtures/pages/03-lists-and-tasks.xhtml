@@ -1,0 +1,92 @@
+<p>Task state is the single most damaging thing an exporter can get wrong: a
+completed item that exports as incomplete changes a fact, not a format.</p>
+
+<h2>C3.1 Task list with mixed state</h2>
+<ac:task-list>
+  <ac:task><ac:task-id>1</ac:task-id><ac:task-status>incomplete</ac:task-status><ac:task-body>Not done yet</ac:task-body></ac:task>
+  <ac:task><ac:task-id>2</ac:task-id><ac:task-status>complete</ac:task-status><ac:task-body>DONE — this one is finished</ac:task-body></ac:task>
+  <ac:task><ac:task-id>3</ac:task-id><ac:task-status>complete</ac:task-status><ac:task-body>DONE — and this one too</ac:task-body></ac:task>
+  <ac:task><ac:task-id>4</ac:task-id><ac:task-status>incomplete</ac:task-status><ac:task-body>Still open, with <strong>bold</strong> and <code>code</code></ac:task-body></ac:task>
+</ac:task-list>
+
+<h2>C3.2 Bullet list nested three levels</h2>
+<ul>
+  <li>Level one A
+    <ul>
+      <li>Level two A-1
+        <ul>
+          <li>Level three A-1-a</li>
+          <li>Level three A-1-b</li>
+        </ul>
+      </li>
+      <li>Level two A-2</li>
+    </ul>
+  </li>
+  <li>Level one B</li>
+</ul>
+
+<h2>C3.3 Ordered list nested inside an ordered list</h2>
+<ol>
+  <li>First
+    <ol>
+      <li>First of the inner list</li>
+      <li>Second of the inner list</li>
+    </ol>
+  </li>
+  <li>Second</li>
+</ol>
+
+<h2>C3.4 Mixed ordered and bullet nesting</h2>
+<ol>
+  <li>Ordered outer
+    <ul>
+      <li>Bullet inner
+        <ol>
+          <li>Ordered innermost</li>
+        </ol>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h2>C3.5 A list item containing two paragraphs</h2>
+<ul>
+  <li>
+    <p>First paragraph of the item.</p>
+    <p>Second paragraph of the same item. These two must not be glued together.</p>
+  </li>
+  <li><p>A second item.</p></li>
+</ul>
+
+<h2>C3.6 A list item containing a code block</h2>
+<ol>
+  <li>
+    <p>Install it.</p>
+    <ac:structured-macro ac:name="code">
+      <ac:parameter ac:name="language">bash</ac:parameter>
+      <ac:plain-text-body><![CDATA[npm install -g @forge/cli]]></ac:plain-text-body>
+    </ac:structured-macro>
+  </li>
+  <li><p>Then verify.</p></li>
+  <li><p>Done.</p></li>
+</ol>
+
+<h2>C3.7 A list item containing a table</h2>
+<ul>
+  <li>
+    <p>An item with a table attached.</p>
+    <table><tbody>
+      <tr><th>Key</th><th>Value</th></tr>
+      <tr><td>a</td><td>1</td></tr>
+      <tr><td>b</td><td>2</td></tr>
+    </tbody></table>
+  </li>
+</ul>
+
+<h2>C3.8 A list item containing a nested quote</h2>
+<ul>
+  <li>
+    <p>Item with a quote.</p>
+    <blockquote><p>Quoted inside a list item.</p></blockquote>
+  </li>
+</ul>

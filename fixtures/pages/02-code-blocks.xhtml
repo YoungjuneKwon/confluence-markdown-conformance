@@ -1,0 +1,69 @@
+<p>Code macros are where exporters most often drop information. The language
+attribute is the usual casualty.</p>
+
+<h2>C2.1 Code macro with a language</h2>
+<ac:structured-macro ac:name="code">
+  <ac:parameter ac:name="language">python</ac:parameter>
+  <ac:plain-text-body><![CDATA[def render(node: dict) -> str:
+    """Convert one ADF node."""
+    return node["type"]
+]]></ac:plain-text-body>
+</ac:structured-macro>
+
+<h2>C2.2 A different language</h2>
+<ac:structured-macro ac:name="code">
+  <ac:parameter ac:name="language">bash</ac:parameter>
+  <ac:plain-text-body><![CDATA[forge deploy --environment production
+forge install --site example.atlassian.net
+]]></ac:plain-text-body>
+</ac:structured-macro>
+
+<h2>C2.3 Code macro with no language</h2>
+<ac:structured-macro ac:name="code">
+  <ac:plain-text-body><![CDATA[plain text block
+  indentation preserved
+    three levels deep
+]]></ac:plain-text-body>
+</ac:structured-macro>
+
+<h2>C2.4 Code macro with a title</h2>
+<ac:structured-macro ac:name="code">
+  <ac:parameter ac:name="language">yaml</ac:parameter>
+  <ac:parameter ac:name="title">manifest.yml</ac:parameter>
+  <ac:plain-text-body><![CDATA[modules:
+  confluence:contentAction:
+    - key: export
+]]></ac:plain-text-body>
+</ac:structured-macro>
+
+<h2>C2.5 Code that contains a Markdown fence</h2>
+<ac:structured-macro ac:name="code">
+  <ac:parameter ac:name="language">markdown</ac:parameter>
+  <ac:plain-text-body><![CDATA[Here is a fence inside a code block:
+```
+not the end of the block
+```
+Still inside.
+]]></ac:plain-text-body>
+</ac:structured-macro>
+
+<h2>C2.6 A single very long line</h2>
+<ac:structured-macro ac:name="code">
+  <ac:parameter ac:name="language">shell</ac:parameter>
+  <ac:plain-text-body><![CDATA[curl -s -H "Authorization: Bearer $TOKEN" "https://example.atlassian.net/wiki/api/v2/pages?space-id=123&limit=250&body-format=atlas_doc_format" | jq '.results[] | {id, title}'
+]]></ac:plain-text-body>
+</ac:structured-macro>
+
+<h2>C2.7 Non-ASCII inside a code block</h2>
+<ac:structured-macro ac:name="code">
+  <ac:parameter ac:name="language">json</ac:parameter>
+  <ac:plain-text-body><![CDATA[{ "제목": "한글 값", "絵文字": "🚀" }
+]]></ac:plain-text-body>
+</ac:structured-macro>
+
+<h2>C2.8 Preformatted (noformat) macro</h2>
+<ac:structured-macro ac:name="noformat">
+  <ac:plain-text-body><![CDATA[no syntax highlighting here
+    but whitespace matters
+]]></ac:plain-text-body>
+</ac:structured-macro>
