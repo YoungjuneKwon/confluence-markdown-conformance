@@ -1,7 +1,6 @@
 # 03 Lists and tasks
 
-Task state is the single most damaging thing an exporter can get wrong: a
-completed item that exports as incomplete changes a fact, not a format.
+Task state is the single most damaging thing an exporter can get wrong: a completed item that exports as incomplete changes a fact, not a format.
 
 ## C3.1 Task list with mixed state
 
@@ -13,10 +12,8 @@ completed item that exports as incomplete changes a fact, not a format.
 ## C3.2 Bullet list nested three levels
 
 - Level one A
-      
 
   - Level two A-1
-            
 
     - Level three A-1-a
     - Level three A-1-b
@@ -26,7 +23,6 @@ completed item that exports as incomplete changes a fact, not a format.
 ## C3.3 Ordered list nested inside an ordered list
 
 1. First
-       
 
    1. First of the inner list
    2. Second of the inner list
@@ -35,10 +31,8 @@ completed item that exports as incomplete changes a fact, not a format.
 ## C3.4 Mixed ordered and bullet nesting
 
 1. Ordered outer
-       
 
    - Bullet inner
-             
 
      1. Ordered innermost
 

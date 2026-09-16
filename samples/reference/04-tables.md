@@ -1,7 +1,6 @@
 # 04 Tables
 
-Confluence tables can hold block content and merged cells. Markdown tables
-cannot. What an exporter does at that boundary is the whole test.
+Confluence tables can hold block content and merged cells. Markdown tables cannot. What an exporter does at that boundary is the whole test.
 
 ## C4.1 A plain table with a header row
 

@@ -2,7 +2,7 @@
   "label": "Markdown Exporter for Confluence 3.5.0",
   "files": 29,
   "mdFiles": 21,
-  "earned": 101,
+  "earned": 99,
   "total": 141,
   "results": [
     {
@@ -162,7 +162,7 @@
       "group": "Lists and tasks",
       "severity": "major",
       "rule": "An ordered list nested inside an ordered list stays nested.",
-      "pass": true,
+      "pass": false,
       "error": null
     },
     {

@@ -82,6 +82,33 @@ function maxListDepth() {
   return best
 }
 
+/** How deep in lists a given phrase sits — 0 means it is not in a list at all. */
+function listDepthOfText(needle) {
+  let best = 0
+  for (const toks of allTokens) {
+    let d = 0
+    for (const t of toks) {
+      if (t.type.endsWith('_list_open')) d++
+      else if (t.type.endsWith('_list_close')) d--
+      else if (t.type === 'inline' && t.content.includes(needle)) best = Math.max(best, d)
+    }
+  }
+  return best
+}
+
+/** Whether a fence whose content matches `re` sits inside a list item. */
+function fenceInListMatching(re) {
+  for (const toks of allTokens) {
+    let d = 0
+    for (const t of toks) {
+      if (t.type.endsWith('_list_open')) d++
+      else if (t.type.endsWith('_list_close')) d--
+      else if ((t.type === 'fence' || t.type === 'code_block') && d > 0 && re.test(t.content)) return true
+    }
+  }
+  return false
+}
+
 function blockInsideList(type) {
   for (const toks of allTokens) {
     let d = 0
@@ -126,6 +153,7 @@ const ctx = {
   hasFiles: (names) => names.every((n) => files.some((f) => path.basename(f) === n)),
   hasFileMatching: (re) => files.some((f) => re.test(f)),
   fenceLanguages, codeBlockContents, maxListDepth, blockInsideList, tableRows, filesContaining,
+  listDepthOfText, fenceInListMatching,
   fileForContent: (needle, predicate) => {
     const hits = filesContaining(needle)
     return hits.length === 1 && predicate(hits[0])

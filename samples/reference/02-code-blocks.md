@@ -1,7 +1,6 @@
 # 02 Code blocks
 
-Code macros are where exporters most often drop information. The language
-attribute is the usual casualty.
+Code macros are where exporters most often drop information. The language attribute is the usual casualty.
 
 ## C2.1 Code macro with a language
 

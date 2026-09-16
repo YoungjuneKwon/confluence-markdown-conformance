@@ -9,7 +9,7 @@ often — one of them was rewritten from scratch eight days before it was tested
 
 | App | Version | Tested | Cases | Weighted | Critical failures |
 |---|---|---|---|---|---|
-| Markdown Exporter for Confluence (Narva Software) | 3.5.0 | 2026-09-16 | 47/63 | 101/141 (72%) | 9 |
+| Markdown Exporter for Confluence (Narva Software) | 3.5.0 | 2026-09-16 | 46/63 | 99/141 (70%) | 9 |
 | *(reference implementation — see the disclosure below)* | 0.1.0 | 2026-09-16 | 63/63 | 141/141 (100%) | 0 |
 
 ### By group
@@ -18,7 +18,7 @@ often — one of them was rewritten from scratch eight days before it was tested
 |---|---|---|
 | Text and marks | 9/10 | 10/10 |
 | Code blocks | 4/7 | 7/7 |
-| Lists and tasks | 4/7 | 7/7 |
+| Lists and tasks | 3/7 | 7/7 |
 | Tables | **6/6** | **6/6** |
 | Media | 6/8 | 8/8 |
 | Macros | 7/8 | 8/8 |
@@ -42,6 +42,7 @@ to a macro nobody taught the exporter about.
 | C2.1 · C2.2 | code block language | dropped | kept |
 | C2.5 | a fence inside a code block | closes the block early | delimiter widened |
 | C3.1 | a completed task | exports as **incomplete** | exports as completed |
+| C3.3 | an ordered list inside an ordered list | indented two spaces, so it flattens | indented three, stays nested |
 | C3.5 | two paragraphs in one item | concatenated, no space | kept apart |
 | C3.6 | a code block in a list item | escapes the list | stays indented |
 | C5.8 | an image wrapped in a link | broken Markdown | one valid line |
@@ -148,6 +149,12 @@ literal `[` and `](https://www.atlassian.com/)` into the page.
 
 Parsed with CommonMark, the fences sit at list depth 0 in the export and list
 depth 1 in the source. A three-step numbered list becomes three separate lists.
+
+**C3.3 — a nested ordered list flattens.** `major`
+
+The inner list is indented two spaces. An ordered item's content column is three,
+so CommonMark reads the indent as a continuation of the outer list rather than a
+new one, and `1 → 1, 2 → 2` becomes a flat `1, 2, 3, 4`.
 
 **C3.5 — two paragraphs in one list item are concatenated.** `critical`
 

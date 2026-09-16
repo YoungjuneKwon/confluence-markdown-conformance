@@ -1,7 +1,6 @@
 # 05 Media and attachments
 
-Attachments must come out of the export as files, with body references
-rewritten to point at them. External images must not be silently dropped.
+Attachments must come out of the export as files, with body references rewritten to point at them. External images must not be silently dropped.
 
 ## C5.1 An attached PNG
 

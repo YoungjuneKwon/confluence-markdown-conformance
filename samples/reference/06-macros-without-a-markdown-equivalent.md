@@ -1,7 +1,6 @@
 # 06 Macros without a Markdown equivalent
 
-These are Confluence constructs with no Markdown equivalent. The rule for all
-of them is the same: **degrade, never delete.**
+These are Confluence constructs with no Markdown equivalent. The rule for all of them is the same: **degrade, never delete.**
 
 ## C6.1 Info, note, warning, tip panels
 
@@ -40,10 +39,7 @@ Hidden body text. This must not disappear just because it is collapsed.
 
 ## C6.4 Status lozenge
 
-Build state:
-  **PASSED**
-  and
-  **FAILED**
+Build state: **PASSED** and **FAILED**
 
 ## C6.5 A date
 

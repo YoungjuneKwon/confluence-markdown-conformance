@@ -121,12 +121,16 @@ export const CASES = [
   {
     id: 'C3.2', group: 'Lists and tasks', severity: 'major',
     rule: 'A bullet list nested three levels deep keeps all three levels.',
-    check: (x) => x.maxListDepth() >= 3 && x.has('Level three A-1-a'),
+    // Anchored to the innermost item: a nested list anywhere else in the export
+    // must not be allowed to vouch for this one.
+    check: (x) => x.listDepthOfText('Level three A-1-a') >= 3,
   },
   {
     id: 'C3.3', group: 'Lists and tasks', severity: 'major',
     rule: 'An ordered list nested inside an ordered list stays nested.',
-    check: (x) => /<ol>[\s\S]{0,400}<ol>/.test(x.html),
+    // Two spaces is not enough to continue an ordered item — the content column
+    // is three — so an under-indented nested list silently flattens.
+    check: (x) => x.listDepthOfText('First of the inner list') >= 2,
   },
   {
     id: 'C3.5', group: 'Lists and tasks', severity: 'critical',
@@ -138,7 +142,7 @@ export const CASES = [
   {
     id: 'C3.6', group: 'Lists and tasks', severity: 'critical',
     rule: 'A code block inside a list item stays inside that item and does not split the list.',
-    check: (x) => x.blockInsideList('fence') || x.blockInsideList('code_block'),
+    check: (x) => x.fenceInListMatching(/npm install -g @forge\/cli/),
   },
   {
     id: 'C3.7', group: 'Lists and tasks', severity: 'major',
