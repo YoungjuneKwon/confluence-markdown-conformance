@@ -1,9 +1,9 @@
 {
   "label": "confluence-faithful-markdown 0.1.0",
-  "files": 27,
-  "mdFiles": 20,
-  "earned": 131,
-  "total": 131,
+  "files": 29,
+  "mdFiles": 21,
+  "earned": 141,
+  "total": 141,
   "results": [
     {
       "id": "C1.1",
@@ -434,6 +434,54 @@
       "group": "Title hazards",
       "severity": "minor",
       "rule": "A title containing emoji is exported without crashing.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C10.1",
+      "group": "Embeds and diagrams",
+      "severity": "major",
+      "rule": "A Mermaid diagram keeps its fence language, so a renderer can still draw it.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C10.2",
+      "group": "Embeds and diagrams",
+      "severity": "major",
+      "rule": "PlantUML source survives as a code block even though no common renderer draws it.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C10.3",
+      "group": "Embeds and diagrams",
+      "severity": "major",
+      "rule": "An HTML macro body comes out as markup, not as inert text or a comment.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C10.4",
+      "group": "Embeds and diagrams",
+      "severity": "minor",
+      "rule": "Markup written directly in the page body keeps its text.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C10.5",
+      "group": "Embeds and diagrams",
+      "severity": "major",
+      "rule": "A diagram macro whose picture is an attachment still shows the picture, or at least names it.",
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "C10.6",
+      "group": "Embeds and diagrams",
+      "severity": "minor",
+      "rule": "A link to an external site survives with its text and target.",
       "pass": true,
       "error": null
     },

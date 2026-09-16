@@ -325,6 +325,43 @@ export const CASES = [
     check: (x) => x.filesContaining('the title contains emoji').length === 1,
   },
 
+  // ------------------------------------------------------------- 10 embeds
+  {
+    id: 'C10.1', group: 'Embeds and diagrams', severity: 'major',
+    rule: 'A Mermaid diagram keeps its fence language, so a renderer can still draw it.',
+    check: (x) => x.fenceLanguages().includes('mermaid')
+      && x.codeBlockContents().some((c) => c.includes('A[Confluence page]')),
+  },
+  {
+    id: 'C10.2', group: 'Embeds and diagrams', severity: 'major',
+    rule: 'PlantUML source survives as a code block even though no common renderer draws it.',
+    check: (x) => x.codeBlockContents().some((c) => c.includes('User -> Exporter : export space')),
+  },
+  {
+    id: 'C10.3', group: 'Embeds and diagrams', severity: 'major',
+    rule: 'An HTML macro body comes out as markup, not as inert text or a comment.',
+    check: (x) => /<div class="callout"><b>html macro body<\/b><\/div>/.test(x.text)
+      && !/<!--[^>]*html macro body/.test(x.text),
+  },
+  {
+    id: 'C10.4', group: 'Embeds and diagrams', severity: 'minor',
+    rule: 'Markup written directly in the page body keeps its text.',
+    check: (x) => x.has('raw markup body'),
+  },
+  {
+    id: 'C10.5', group: 'Embeds and diagrams', severity: 'major',
+    rule: 'A diagram macro whose picture is an attachment still shows the picture, or at least names it.',
+    // Copying the bytes into the export and never referencing them ships the
+    // file and loses the diagram, so the body has to point at it.
+    check: (x) => x.hasFileMatching(/architecture\.png$/)
+      && /(!\[[^\]]*\]\([^)]*architecture[^)]*\))|architecture/.test(x.text),
+  },
+  {
+    id: 'C10.6', group: 'Embeds and diagrams', severity: 'minor',
+    rule: 'A link to an external site survives with its text and target.',
+    check: (x) => /\[the conformance suite\]\(https:\/\/github\.com\/[^)]+\)/.test(x.text),
+  },
+
   // ------------------------------------------------------------- 09 depth
   {
     id: 'C9.1', group: 'Page tree', severity: 'critical',

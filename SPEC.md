@@ -206,6 +206,17 @@ defensible stylistic choice.
 | `C8.5` | major | A title containing punctuation illegal in filenames is exported safely, not dropped. |
 | `C8.6` | minor | A title containing emoji is exported without crashing. |
 
+### Embeds and diagrams
+
+| Id | Severity | Rule |
+|---|---|---|
+| `C10.1` | major | A Mermaid diagram keeps its fence language, so a renderer can still draw it. |
+| `C10.2` | major | PlantUML source survives as a code block even though no common renderer draws it. |
+| `C10.3` | major | An HTML macro body comes out as markup, not as inert text or a comment. |
+| `C10.4` | minor | Markup written directly in the page body keeps its text. |
+| `C10.5` | major | A diagram macro whose picture is an attachment still shows the picture, or at least names it. |
+| `C10.6` | minor | A link to an external site survives with its text and target. |
+
 ### Page tree
 
 | Id | Severity | Rule |
@@ -214,6 +225,6 @@ defensible stylistic choice.
 | `C9.2` | major | The exported directory structure mirrors the page hierarchy. |
 | `C9.3` | critical | Every page in the corpus appears exactly once in the export. |
 
-57 rules: 23 critical, 28 major, 6 minor.
+63 rules: 23 critical, 32 major, 8 minor.
 
 <!-- END RULES -->

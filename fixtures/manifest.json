@@ -61,7 +61,6 @@
       "body": "07-layout.xhtml",
       "parent": "home"
     },
-
     {
       "id": "titles",
       "title": "08 Title hazards",
@@ -110,7 +109,15 @@
       "body": "08g-collision.xhtml",
       "parent": "titles"
     },
-
+    {
+      "id": "embeds",
+      "title": "10 Embeds and diagrams",
+      "body": "10-embeds.xhtml",
+      "parent": "home",
+      "attachments": [
+        "architecture.png"
+      ]
+    },
     {
       "id": "depth1",
       "title": "09 Depth 1",

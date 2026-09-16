@@ -1,0 +1,5 @@
+# 한글로만 이루어진 제목
+
+Hazard: the title is entirely Korean. A slug generator that strips non-ASCII characters has nothing left to work with and will fall back to a placeholder.
+
+Expected: the exported filename still identifies this page to a human.

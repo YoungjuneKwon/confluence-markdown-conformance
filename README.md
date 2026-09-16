@@ -4,7 +4,7 @@ A reproducible way to find out what your Confluence → Markdown exporter keeps,
 and what it quietly throws away.
 
 You seed a Confluence space with a fixed corpus, export it with whatever app you
-use, and run a scorer. The scorer checks 57 rules and tells you which ones your
+use, and run a scorer. The scorer checks 63 rules and tells you which ones your
 export breaks.
 
 It exists because this kind of damage is invisible. A completed task that exports
@@ -57,6 +57,7 @@ for content that was never on the page. This happened while building this corpus
 | Macros | info/note/warning/tip panels, expand, status, date, excerpt, include, **unknown third-party macros** |
 | Layout | column layouts flattened without losing a cell |
 | Title hazards | Korean, Japanese, mixed-script, punctuation, emoji, near-colliding titles |
+| Embeds and diagrams | Mermaid, PlantUML, HTML macro, raw markup, a diagram macro whose picture is an attachment, external links |
 | Page tree | four levels deep, directory structure, no page exported twice |
 
 Each rule carries a severity:
@@ -69,7 +70,13 @@ The full rule list, with the reasoning behind each one, is in [SPEC.md](SPEC.md)
 
 ## Results
 
-Measured results for shipping apps are in [RESULTS.md](RESULTS.md).
+Measured results, a group-by-group comparison and a case-by-case table are in
+[RESULTS.md](RESULTS.md).
+
+**[samples/](samples/) holds the actual output of two exporters run on the same
+space**, so you can read the difference rather than the scores. GitHub renders
+those files, which is the point — one export's Mermaid diagram draws and the
+other's does not.
 
 ## The one rule behind all the others
 

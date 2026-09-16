@@ -1,0 +1,46 @@
+<p>Diagrams and embedded markup are where "degrade, never delete" is easiest to
+get wrong, because the thing that is lost is a picture rather than a sentence.</p>
+
+<h2>C10.1 Mermaid</h2>
+<p>Mermaid is drawn by GitHub, GitLab and most static site generators — but only
+when the fence declares the language. Drop it and a diagram becomes a text dump.</p>
+<ac:structured-macro ac:name="code">
+  <ac:parameter ac:name="language">mermaid</ac:parameter>
+  <ac:plain-text-body><![CDATA[graph TD
+  A[Confluence page] --> B[ADF]
+  B --> C[Markdown]
+  C --> A]]></ac:plain-text-body>
+</ac:structured-macro>
+
+<h2>C10.2 PlantUML</h2>
+<p>No common renderer draws PlantUML, so preserving the source is the whole job.</p>
+<ac:structured-macro ac:name="code">
+  <ac:parameter ac:name="language">plantuml</ac:parameter>
+  <ac:plain-text-body><![CDATA[@startuml
+actor User
+User -> Exporter : export space
+Exporter --> User : markdown
+@enduml]]></ac:plain-text-body>
+</ac:structured-macro>
+
+<h2>C10.3 HTML macro</h2>
+<p>An HTML macro exists to emit markup. Keeping the characters but losing the
+markup keeps the letter of the rule and breaks its spirit.</p>
+<ac:structured-macro ac:name="html">
+  <ac:plain-text-body><![CDATA[<div class="callout"><b>html macro body</b></div>]]></ac:plain-text-body>
+</ac:structured-macro>
+
+<h2>C10.4 Raw markup in the page body</h2>
+<div class="raw-wrapper"><strong>raw markup body</strong></div>
+
+<h2>C10.5 A diagram macro whose picture is an attachment</h2>
+<p>draw.io and Gliffy store the rendered picture as an attachment and keep only
+its name in the macro. An exporter that copies the attachment but never
+references it has shipped the bytes and lost the diagram.</p>
+<ac:structured-macro ac:name="drawio">
+  <ac:parameter ac:name="diagramName">architecture</ac:parameter>
+  <ac:parameter ac:name="revision">1</ac:parameter>
+</ac:structured-macro>
+
+<h2>C10.6 Smart link to an external site</h2>
+<p>See <a href="https://github.com/YoungjuneKwon/confluence-markdown-conformance">the conformance suite</a>.</p>

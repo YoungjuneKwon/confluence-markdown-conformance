@@ -9,8 +9,48 @@ often — one of them was rewritten from scratch eight days before it was tested
 
 | App | Version | Tested | Cases | Weighted | Critical failures |
 |---|---|---|---|---|---|
-| Markdown Exporter for Confluence (Narva Software) | 3.5.0 | 2026-09-15 | 44/57 | 97/131 (74%) | 9 |
-| *(reference implementation — see the disclosure below)* | 0.1.0 | 2026-09-15 | 57/57 | 131/131 (100%) | 0 |
+| Markdown Exporter for Confluence (Narva Software) | 3.5.0 | 2026-09-16 | 47/63 | 101/141 (72%) | 9 |
+| *(reference implementation — see the disclosure below)* | 0.1.0 | 2026-09-16 | 63/63 | 141/141 (100%) | 0 |
+
+### By group
+
+| Group | Narva 3.5.0 | Reference |
+|---|---|---|
+| Text and marks | 9/10 | 10/10 |
+| Code blocks | 4/7 | 7/7 |
+| Lists and tasks | 4/7 | 7/7 |
+| Tables | **6/6** | **6/6** |
+| Media | 6/8 | 8/8 |
+| Macros | 7/8 | 8/8 |
+| Layout | **2/2** | **2/2** |
+| Title hazards | 3/6 | 6/6 |
+| Embeds and diagrams | 3/6 | 6/6 |
+| Page tree | **3/3** | **3/3** |
+
+Three groups are a draw. Tables, column layouts and page-tree depth are handled
+correctly by both — merged cells, block content inside cells and four levels of
+hierarchy all survive either way. **The loss is not spread evenly; it is
+concentrated.** Every difference below comes from one of four places: what
+happens to a filename, to a fence's language, to the inside of a list item, and
+to a macro nobody taught the exporter about.
+
+### Case by case
+
+| Case | What is at stake | Narva 3.5.0 | Reference |
+|---|---|---|---|
+| C1.8 | underline / sub / sup | flattened to plain text | HTML fallback |
+| C2.1 · C2.2 | code block language | dropped | kept |
+| C2.5 | a fence inside a code block | closes the block early | delimiter widened |
+| C3.1 | a completed task | exports as **incomplete** | exports as completed |
+| C3.5 | two paragraphs in one item | concatenated, no space | kept apart |
+| C3.6 | a code block in a list item | escapes the list | stays indented |
+| C5.8 | an image wrapped in a link | broken Markdown | one valid line |
+| C5.11 | a non-image attachment | linked back to the wiki | linked relatively |
+| C6.10 | an unknown macro | body replaced by a placeholder | body kept |
+| C8.1 · C8.2 · C8.3 | non-ASCII page titles | `page-<uuid>.md`, `ascii.md` | the title, kept |
+| C10.1 | a Mermaid diagram | language dropped, so it stops rendering | still draws |
+| C10.3 | an HTML macro | body replaced by a placeholder | markup kept |
+| C10.5 | a draw.io diagram | attachment exported but never referenced | referenced as an image |
 
 ### Disclosure
 
@@ -130,6 +170,30 @@ rest of the block becomes body text followed by a stray empty code block.
 The ADF carries `language: python`, `shell`, `yaml`, `json`. Every exported fence
 is a bare ```` ``` ````. Syntax highlighting is lost and cannot be recovered on
 re-import.
+
+**C10.1 — a Mermaid diagram stops being a diagram.** `major`
+
+The fence loses its language, so what GitHub drew as a flowchart becomes a block
+of text:
+
+````
+```                     ← should be ```mermaid
+graph TD
+  A[Confluence page] --> B[ADF]
+```
+````
+
+**C10.3 / C10.5 — an HTML macro and a draw.io diagram both vanish into a placeholder.** `major`
+
+Both come out as an image pointing at an authenticated Confluence servlet:
+
+```markdown
+![](https://your-site.atlassian.net/wiki/plugins/servlet/confluence/placeholder/unknown-macro?name=drawio&…)
+```
+
+The draw.io case is the sharper one. `architecture.png` **is** written into
+`attachments/` — the bytes ship and nothing in the body ever points at them. The
+file is in the export and the diagram is not.
 
 **C1.8 — underline, subscript and superscript are flattened.** `minor`
 
