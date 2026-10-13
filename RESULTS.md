@@ -12,6 +12,12 @@ often — one of them was rewritten from scratch eight days before it was tested
 | Markdown Exporter for Confluence (Narva Software) | 3.5.0 | 2026-09-16 | 46/63 | 99/141 (70%) | 9 |
 | *(reference implementation — see the disclosure below)* | 0.1.0 | 2026-09-16 | 63/63 | 141/141 (100%) | 0 |
 
+> **The second row is the author's own converter.** It is here because hiding it
+> would be worse, not because it is an independent result — treat it as the author
+> marking their own homework. Full disclosure at the bottom of this file.
+> **One third-party exporter has been measured so far.** That is the honest size
+> of this benchmark today.
+
 ### By group
 
 | Group | Narva 3.5.0 | Reference |

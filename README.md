@@ -1,21 +1,82 @@
-# confluence-markdown-conformance
+# What Confluence → Markdown exporters lose
 
-A reproducible way to find out what your Confluence → Markdown exporter keeps,
-and what it quietly throws away.
+Markdown cannot express everything Confluence can, so every exporter has to give
+something up. The question is **what**, and none of them tell you.
 
-You seed a Confluence space with a fixed corpus, export it with whatever app you
-use, and run a scorer. The scorer checks 63 rules and tells you which ones your
-export breaks.
+This repository answers it by measurement. You seed a Confluence space with a
+fixed corpus, export it with whatever app you use, and run a scorer. The scorer
+checks **63 rules** and names the ones your export breaks.
 
-It exists because this kind of damage is invisible. A completed task that exports
-as incomplete, a Korean page title that becomes `page-4a8efd2d-….md`, a code block
-that loses its language — none of it throws an error. You only find out later,
-in the repository you migrated to.
+The damage is invisible without this. A completed task that exports as
+incomplete, a Korean page title that becomes `page-4a8efd2d-….md`, a fenced block
+that loses its language — nothing throws an error. You find out later, in the
+repository you migrated to.
 
-## Quick start
+---
 
-You need Node 18+ and a Confluence Cloud site where you can create a space.
-Get an API token from <https://id.atlassian.com/manage-profile/security/api-tokens>.
+## What the measurement found
+
+Two exporters, same seeded space, 2026-09-16. Raw `--json` output is in
+[`results/`](results/); a score without a version and a date is not a measurement.
+
+| App | Version | Cases | Weighted | Critical failures |
+|---|---|---|---|---|
+| Markdown Exporter for Confluence (Narva Software) | 3.5.0 | 46/63 | 99/141 (70%) | **9** |
+| Reference implementation — **the author's own** | 0.1.0 | 63/63 | 141/141 (100%) | 0 |
+
+> ### Read the second row with suspicion
+>
+> It is the author's own converter, written after the suite, and it shipped on
+> 2026-10-13 as *Faithful Markdown Export for Confluence*. It is in the table
+> because hiding it would be worse — not because it is an independent result.
+> **Treat it as the author marking their own homework.** The suite, the corpus and
+> every raw output are here so you can re-run it and disagree.
+>
+> **Only one third-party exporter has been measured so far.** That is the honest
+> size of this benchmark today. See [adding an exporter](#add-an-exporter).
+
+**The loss is not spread evenly.** Three of the ten groups are a draw — tables,
+column layouts and page-tree depth survive either way, merged cells and four
+levels of hierarchy included. Everything that differs comes from four places:
+
+1. what happens to a **filename** when the page title is not ASCII
+2. what happens to a fenced block's **language**
+3. what happens to anything **inside a list item**
+4. what happens to a **macro the exporter was never taught about**
+
+A few of the 63, to show what a case looks like:
+
+| Case | What is at stake | Narva 3.5.0 |
+|---|---|---|
+| C3.1 | a completed task | exports as **incomplete** |
+| C2.1 | a code block's language | dropped |
+| C3.6 | a code block inside a list item | escapes the list |
+| C6.10 | a macro nobody taught the exporter about | body replaced by a placeholder |
+| C5.8 | an image wrapped in a link | broken Markdown |
+
+Group-by-group and case-by-case tables: **[RESULTS.md](RESULTS.md)**.
+Two real exports of the same space, side by side: **[samples/](samples/)** —
+GitHub renders them, which is the point. One export's Mermaid diagram draws and
+the other's does not.
+
+---
+
+## The one rule behind all 63
+
+> **Degrade, never delete.**
+
+There is no faithful Markdown for a merged table cell, a three-column layout, or
+a task list inside a panel. That is fine. Dropping the text is not.
+
+An exporter that flattens a layout into plain paragraphs passes. An exporter that
+omits the second column fails.
+
+---
+
+## Run it against your exporter
+
+Node 18+ and a Confluence Cloud site where you can create a space. Get an API
+token at <https://id.atlassian.com/manage-profile/security/api-tokens>.
 
 ```sh
 npm install
@@ -28,8 +89,8 @@ node scripts/seed.mjs          # creates the MDCONF space, 20 pages, 7 attachmen
 node scripts/verify-seed.mjs   # confirms Confluence actually stored all of it
 ```
 
-Then export the `Markdown Conformance Corpus` page and all of its descendants
-with the app you are testing, unzip the result, and score it:
+Export the `Markdown Conformance Corpus` page and all of its descendants with the
+app you are testing, unzip, and score:
 
 ```sh
 unzip export.zip -d out/my-app
@@ -38,12 +99,12 @@ node scripts/score.mjs out/my-app --label "My App 1.2.3"
 
 `--json` gives machine-readable output.
 
-### Why `verify-seed.mjs` matters
+**Run `verify-seed.mjs` first.** Confluence silently discards storage markup it
+does not accept; the page still exists but the section is empty, and the exporter
+then gets blamed for content that was never on the page. That happened while this
+corpus was being built.
 
-Confluence silently discards storage markup it does not accept. When that happens
-the page still exists but the section is empty — and the exporter then gets blamed
-for content that was never on the page. This happened while building this corpus.
-**Run the verifier before you score anything.**
+---
 
 ## What is measured
 
@@ -60,64 +121,43 @@ for content that was never on the page. This happened while building this corpus
 | Embeds and diagrams | Mermaid, PlantUML, HTML macro, raw markup, a diagram macro whose picture is an attachment, external links |
 | Page tree | four levels deep, directory structure, no page exported twice |
 
-Each rule carries a severity:
-
-- **critical** — the export changes a fact or loses content outright
-- **major** — information present in Confluence does not survive
-- **minor** — the output is valid but awkward
+Severities: **critical** — the export changes a fact or loses content outright ·
+**major** — information present in Confluence does not survive · **minor** — the
+output is valid but awkward.
 
 The full rule list, with the reasoning behind each one, is in [SPEC.md](SPEC.md).
 
-## Results
+---
 
-Measured 2026-09-16, both exporters run against the same seeded space. Raw
-`--json` output is in `results/`; a score without a version and a date is not a
-measurement.
+## Add an exporter
 
-| App | Version | Cases | Weighted | Critical failures |
-|---|---|---|---|---|
-| Markdown Exporter for Confluence (Narva Software) | 3.5.0 | 46/63 | 99/141 (70%) | 9 |
-| Reference implementation (the author's own — see the disclosure) | 0.1.0 | 63/63 | 141/141 (100%) | 0 |
+This benchmark is one third-party app wide. That is its biggest weakness, and it
+is the one thing a reader can fix in an afternoon.
 
-Three of the ten groups are a draw. Tables, column layouts and page-tree depth
-survive either way, including merged cells and four levels of hierarchy. **The
-loss is not spread evenly; it is concentrated in four places:**
+Run the suite against an exporter that is not here yet, then open a pull request
+adding a row to [RESULTS.md](RESULTS.md) and your `--json` under `results/`.
+Include the app version and the date — these apps ship often, and one of them was
+rewritten from scratch eight days before it was tested.
 
-- what happens to a **filename** when the page title is not ASCII
-- what happens to a fenced block's **language**
-- what happens to anything **inside a list item**
-- what happens to a **macro the exporter was never taught about**
+Results are accepted **whatever they say**, including results that beat the
+author's own converter.
 
-A group-by-group breakdown and a case-by-case table are in
-[RESULTS.md](RESULTS.md).
+## Add a case
 
-**[samples/](samples/) holds the actual output of two exporters run on the same
-space**, so you can read the difference rather than the scores. GitHub renders
-those files, which is the point — one export's Mermaid diagram draws and the
-other's does not.
+A good case is one a real export can get wrong. Put the markup in
+`fixtures/pages/`, give the heading a `Cn.n` id, add the rule to
+`scripts/cases.mjs`, then re-seed and run `verify-seed.mjs` to confirm Confluence
+actually stores it.
 
-## The one rule behind all the others
+---
 
-> **Degrade, never delete.**
+## Get told when the numbers change
 
-Markdown genuinely cannot express everything Confluence can. A merged table cell,
-a three-column layout, a task list inside a panel — there is no faithful Markdown
-for these. That is fine. What is not fine is dropping the text.
+These apps ship often, so every score here has a shelf life. Two ways to hear
+about a re-measurement:
 
-An exporter that flattens a layout into plain paragraphs passes. An exporter that
-omits the second column fails.
-
-## Contributing a result
-
-Run the suite, then open a pull request adding a row to `RESULTS.md` and your
-`--json` output under `results/`. Include the app version and the date — these
-apps ship often, and a score without a version is not a measurement.
-
-## Contributing a case
-
-A good case is one that a real export can get wrong. Add the markup to a file in
-`fixtures/pages/`, give the heading a `Cn.n` id, add the rule to `scripts/cases.mjs`,
-then re-seed and run `verify-seed.mjs` to confirm Confluence actually stores it.
+- **Watch → Custom → Releases** on this repository
+- Mail <yjkwon@winm2m.com> with the subject `conformance updates`
 
 ## Licence
 
