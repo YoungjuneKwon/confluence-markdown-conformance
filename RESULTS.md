@@ -55,9 +55,11 @@ to a macro nobody taught the exporter about.
 
 ### Disclosure
 
-The second row is the author's own converter, written after the suite and not
-yet released. It is here because hiding it would be worse, not because it is an
-independent result — **treat it as the author marking their own homework.**
+The second row is the author's own converter, written after the suite. It was
+unreleased when this was measured; it shipped on 2026-10-13 as *Faithful Markdown
+Export for Confluence*. It is here because hiding it would be worse, not because
+it is an independent result — **treat it as the author marking their own
+homework.**
 
 Two things are checkable rather than taken on trust. The rules were written from
 failures measured in shipping apps *before* that converter existed, and the git

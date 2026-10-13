@@ -70,7 +70,25 @@ The full rule list, with the reasoning behind each one, is in [SPEC.md](SPEC.md)
 
 ## Results
 
-Measured results, a group-by-group comparison and a case-by-case table are in
+Measured 2026-09-16, both exporters run against the same seeded space. Raw
+`--json` output is in `results/`; a score without a version and a date is not a
+measurement.
+
+| App | Version | Cases | Weighted | Critical failures |
+|---|---|---|---|---|
+| Markdown Exporter for Confluence (Narva Software) | 3.5.0 | 46/63 | 99/141 (70%) | 9 |
+| Reference implementation (the author's own — see the disclosure) | 0.1.0 | 63/63 | 141/141 (100%) | 0 |
+
+Three of the ten groups are a draw. Tables, column layouts and page-tree depth
+survive either way, including merged cells and four levels of hierarchy. **The
+loss is not spread evenly; it is concentrated in four places:**
+
+- what happens to a **filename** when the page title is not ASCII
+- what happens to a fenced block's **language**
+- what happens to anything **inside a list item**
+- what happens to a **macro the exporter was never taught about**
+
+A group-by-group breakdown and a case-by-case table are in
 [RESULTS.md](RESULTS.md).
 
 **[samples/](samples/) holds the actual output of two exporters run on the same
