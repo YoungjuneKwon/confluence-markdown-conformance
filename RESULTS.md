@@ -7,31 +7,70 @@ in `results/`.
 **A score without a version and a date is not a measurement.** These apps ship
 often — one of them was rewritten from scratch eight days before it was tested.
 
-| App | Version | Tested | Cases | Weighted | Critical failures |
+| Exporter | Version | Tested | Cases | Weighted | Critical failures |
 |---|---|---|---|---|---|
+| **Confluence's own Markdown export** | beta | 2026-10-14 | 43/63 | **97/141 (69%)** | 7 |
 | Markdown Exporter for Confluence (Narva Software) | 3.5.0 | 2026-09-16 | 46/63 | 99/141 (70%) | 9 |
 | *(reference implementation — see the disclosure below)* | 0.1.0 | 2026-09-16 | 63/63 | 141/141 (100%) | 0 |
 
-> **The second row is the author's own converter.** It is here because hiding it
+> **The third row is the author's own converter.** It is here because hiding it
 > would be worse, not because it is an independent result — treat it as the author
 > marking their own homework. Full disclosure at the bottom of this file.
-> **One third-party exporter has been measured so far.** That is the honest size
-> of this benchmark today.
+> **Two exporters that are not the author's have been measured so far** — one paid
+> third-party app and Atlassian's own built-in export. That is the honest size of
+> this benchmark today.
+
+## Confluence now exports Markdown itself — and loses every attachment
+
+Atlassian shipped a built-in Markdown export (beta). Measured on this suite on
+**2026-10-14** it scores **97/141 (69%)**, with **7 critical failures**. The paid
+third-party exporter measured a month earlier scores 99/141. **The free built-in is
+already level with a paid app**, which is the first thing anyone evaluating this
+category should know.
+
+The failures are not spread out. They sit in one place.
+
+| Group | Confluence native (beta) |
+|---|---|
+| **Media** | **0/8** |
+| Code blocks | 4/7 |
+| Embeds and diagrams | 4/6 |
+| Macros | 6/8 |
+
+**Every media case fails.** An image in a table, an image wrapped in a link, an
+image referenced by external URL, an attachment with a space in its name, a
+non-image attachment — none of them come out. A page whose meaning lives in a
+screenshot exports as a page without the screenshot, and nothing in the output
+says so.
+
+Two more are worth naming because they are silent rather than visible:
+
+- **C1.5** — a link to another exported page still points back into the wiki, so a
+  tree exported for reading offline walks you back online.
+- **C9.2** — the exported directory does not mirror the page hierarchy.
+
+What it does well is real and should be said: **title hazards 6/6** — non-ASCII
+page titles survive, which the paid exporter gets 3/6 on. Lists and tasks 6/7
+against 3/7. On the things people notice first, the built-in is the better of
+the two.
+
+Raw output: `results/confluence-native-beta-2026-10-14.json`. Re-run it yourself
+with `node scripts/score.mjs <export-dir>`.
 
 ### By group
 
-| Group | Narva 3.5.0 | Reference |
-|---|---|---|
-| Text and marks | 9/10 | 10/10 |
-| Code blocks | 4/7 | 7/7 |
-| Lists and tasks | 3/7 | 7/7 |
-| Tables | **6/6** | **6/6** |
-| Media | 6/8 | 8/8 |
-| Macros | 7/8 | 8/8 |
-| Layout | **2/2** | **2/2** |
-| Title hazards | 3/6 | 6/6 |
-| Embeds and diagrams | 3/6 | 6/6 |
-| Page tree | **3/3** | **3/3** |
+| Group | Confluence native (beta) | Narva 3.5.0 | Reference |
+|---|---|---|---|
+| Text and marks | 8/10 | 9/10 | 10/10 |
+| Code blocks | 4/7 | 4/7 | 7/7 |
+| Lists and tasks | 6/7 | 3/7 | 7/7 |
+| Tables | 5/6 | **6/6** | **6/6** |
+| **Media** | **0/8** | 6/8 | 8/8 |
+| Macros | 6/8 | 7/8 | 8/8 |
+| Layout | **2/2** | **2/2** | **2/2** |
+| Title hazards | **6/6** | 3/6 | **6/6** |
+| Embeds and diagrams | 4/6 | 3/6 | 6/6 |
+| Page tree | 2/3 | **3/3** | **3/3** |
 
 Three groups are a draw. Tables, column layouts and page-tree depth are handled
 correctly by both — merged cells, block content inside cells and four levels of
@@ -42,26 +81,26 @@ to a macro nobody taught the exporter about.
 
 ### Case by case
 
-| Case | What is at stake | Narva 3.5.0 | Reference |
-|---|---|---|---|
-| C1.8 | underline / sub / sup | flattened to plain text | HTML fallback |
-| C2.1 · C2.2 | code block language | dropped | kept |
-| C2.5 | a fence inside a code block | closes the block early | delimiter widened |
-| C3.1 | a completed task | exports as **incomplete** | exports as completed |
-| C3.3 | an ordered list inside an ordered list | indented two spaces, so it flattens | indented three, stays nested |
-| C3.5 | two paragraphs in one item | concatenated, no space | kept apart |
-| C3.6 | a code block in a list item | escapes the list | stays indented |
-| C5.8 | an image wrapped in a link | broken Markdown | one valid line |
-| C5.11 | a non-image attachment | linked back to the wiki | linked relatively |
-| C6.10 | an unknown macro | body replaced by a placeholder | body kept |
-| C8.1 · C8.2 · C8.3 | non-ASCII page titles | `page-<uuid>.md`, `ascii.md` | the title, kept |
-| C10.1 | a Mermaid diagram | language dropped, so it stops rendering | still draws |
-| C10.3 | an HTML macro | body replaced by a placeholder | markup kept |
-| C10.5 | a draw.io diagram | attachment exported but never referenced | referenced as an image |
+| Case | What is at stake | Confluence native | Narva 3.5.0 | Reference |
+|---|---|---|---|---|
+| C1.8 | underline / sub / sup | flattened | flattened to plain text | HTML fallback |
+| C2.1 · C2.2 | code block language | kept | dropped | kept |
+| C2.5 | a fence inside a code block | closes the block early | closes the block early | delimiter widened |
+| C3.1 | a completed task | exports as completed | exports as **incomplete** | exports as completed |
+| C3.3 | an ordered list inside an ordered list | stays nested | indented two spaces, so it flattens | indented three, stays nested |
+| C3.5 | two paragraphs in one item | kept apart | concatenated, no space | kept apart |
+| C3.6 | a code block in a list item | escapes the list | escapes the list | stays indented |
+| C5.8 | an image wrapped in a link | attachment absent | broken Markdown | one valid line |
+| C5.11 | a non-image attachment | attachment absent | linked back to the wiki | linked relatively |
+| C6.10 | an unknown macro | body kept | body replaced by a placeholder | body kept |
+| C8.1 · C8.2 · C8.3 | non-ASCII page titles | the title, kept | `page-<uuid>.md`, `ascii.md` | the title, kept |
+| C10.1 | a Mermaid diagram | still draws | language dropped, so it stops rendering | still draws |
+| C10.3 | an HTML macro | body replaced | body replaced by a placeholder | markup kept |
+| C10.5 | a draw.io diagram | attachment absent | attachment exported but never referenced | referenced as an image |
 
 ### Disclosure
 
-The second row is the author's own converter, written after the suite. It was
+The third row is the author's own converter, written after the suite. It was
 unreleased when this was measured; it shipped on 2026-10-13 as *Faithful Markdown
 Export for Confluence*. It is here because hiding it would be worse, not because
 it is an independent result — **treat it as the author marking their own

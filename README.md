@@ -16,15 +16,30 @@ repository you migrated to.
 
 ## What the measurement found
 
-Two exporters, same seeded space, 2026-09-16. Raw `--json` output is in
+Same seeded space, same 63 rules. Raw `--json` output is in
 [`results/`](results/); a score without a version and a date is not a measurement.
 
-| App | Version | Cases | Weighted | Critical failures |
-|---|---|---|---|---|
-| Markdown Exporter for Confluence (Narva Software) | 3.5.0 | 46/63 | 99/141 (70%) | **9** |
-| Reference implementation — **the author's own** | 0.1.0 | 63/63 | 141/141 (100%) | 0 |
+| Exporter | Version | Tested | Cases | Weighted | Critical failures |
+|---|---|---|---|---|---|
+| **Confluence's own Markdown export** | beta | 2026-10-14 | 43/63 | **97/141 (69%)** | **7** |
+| Markdown Exporter for Confluence (Narva Software) | 3.5.0 | 2026-09-16 | 46/63 | 99/141 (70%) | **9** |
+| Reference implementation — **the author's own** | 0.1.0 | 2026-09-16 | 63/63 | 141/141 (100%) | 0 |
 
-> ### Read the second row with suspicion
+### Atlassian's built-in export loses every attachment
+
+Confluence now exports Markdown itself. On this suite it scores **69%**, which puts
+it level with a paid third-party app — but its failures are concentrated: **Media
+0/8**. An image inside a table, an image wrapped in a link, an attachment whose
+name contains a space, a non-image attachment — none of them come out, and nothing
+in the output says so. A page whose meaning lives in a screenshot exports as a page
+without the screenshot.
+
+It is better than the paid app at the things people notice first: non-ASCII page
+titles **6/6** against 3/6, lists and tasks 6/7 against 3/7.
+
+Details and the case-by-case table: [RESULTS.md](RESULTS.md).
+
+> ### Read the third row with suspicion
 >
 > It is the author's own converter, written after the suite, and it shipped on
 > 2026-10-13 as *Faithful Markdown Export for Confluence*. It is in the table
