@@ -177,3 +177,7 @@ about a re-measurement:
 ## Licence
 
 MIT.
+
+---
+
+Built and maintained by [Second Tiger](https://secondtiger.com), a one-person software label.
